@@ -1,12 +1,26 @@
+// User clicks on start button
+// Then first question with answers pops up and timer starts decreasing
+// User clicks on an answer
+    // 1. Move onto next question
+    // 2. If answer is wrong, timer decreases by 2 seconds and you tell them "wrong!"
+// This continues until last question has been answered
+// When an answer on last question gets clicked:
+    // Tell them their score by displaying it
+    // Give them an option to save their score by entering their initials in a form
+        // This score paired with initials gets saved in local storage
+
+
+
+
 // declare all elements //
 
 const startQ = document.querySelector("#startQ");
 const quiz = document.querySelector("#quiz");
 const question = document.querySelector("#question");
 const QImg = document.querySelector("#QImg");
-const  choiceA = document.querySelector("#A");
-const  choiceB = document.querySelector("#B");
-const  choiceC = document.querySelector("#C");
+const choiceA = document.querySelector("#A");
+const choiceB = document.querySelector("#B");
+const choiceC = document.querySelector("#C");
 const counter = document.querySelector("#counter");
 const timeGauge = document.querySelector("#timeGauge");
 const progress = document.querySelector("#progress"); 
@@ -60,4 +74,29 @@ let questions = [
     }
 ];
 
-//   variable creation   //
+const latstQuestion = questions. length -1;
+let runningQ = 0;
+
+
+//   function to run the questions   //
+
+function runQuestion() {
+    let q = questions[runningQ];
+    question.innerHTML = "<p>" + q.question + "</p>";
+    QImg.innerHTML = "<img src="+ q.imgSrc + ">";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+}
+
+startQ.style.display = "none";
+runQuestion();
+quiz.style.display = "block";
+Qprogress();
+//   list the question progress   //
+
+function Qprogress() {
+    for(let qIndex = 0; qIndex <= latstQuestion; qIndex++) {
+        progress.innerHTML += "<div class='prog' id="+qIndex+"></div>";
+    }
+}
