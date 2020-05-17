@@ -74,13 +74,17 @@ let questions = [
     }
 ];
 
-const latstQuestion = questions. length -1;
+const lastQuestion = questions. length -1;
 let runningQ = 0;
-
+let count = 0;
+const questionTime = 10;
+const gaugeWidth = 150; 
+const gaugeUnit = gaugeWidth / questionTime;
+let timer;
 
 //   function to run the questions   //
 
-function runQuestion() {
+function runQuestion(){
     let q = questions[runningQ];
     question.innerHTML = "<p>" + q.question + "</p>";
     QImg.innerHTML = "<img src="+ q.imgSrc + ">";
@@ -89,14 +93,53 @@ function runQuestion() {
     choiceC.innerHTML = q.choiceC;
 }
 
-startQ.style.display = "none";
-runQuestion();
-quiz.style.display = "block";
-Qprogress();
+//   start the quiz   //
+
+startQ.addEventListener("click", startQuiz);
+
+function startQuiz(){
+    startQ.style.display = "none";
+    runQuestion();
+    quiz.style.display = "block";
+    Qprogress();
+    Qcounter();
+    timer = setInterval(Qcounter,1000);
+    let score = 0;
+}
+
 //   list the question progress   //
 
-function Qprogress() {
-    for(let qIndex = 0; qIndex <= latstQuestion; qIndex++) {
-        progress.innerHTML += "<div class='prog' id="+qIndex+"></div>";
+function Qprogress(){
+    for(let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
+        Qprogress.innerHTML += "<div class='prog' id="+qIndex+"></div>";
+    }
+}
+
+//   list correct answers   //
+
+function checkAnswer(answer){
+    if(answer == questions[runningQ].correct) {
+        score ++;
+    } else {timer('decrement()', 2000);}
+    count = 0;
+    if(runningQ < lastQuestion){
+        runningQ++;
+        runQuestion();
+    } else{
+        clearInterval(timer);
+        score();
+    }
+}
+
+
+//   create the time counter   //
+
+function Qcounter () {
+    if(count <= questionTime) {
+        counter.innerHTML = count;
+        timeGauge.style.width = count * gaugeUnit + "px";
+        count++
+    } else {
+        count = 0;
     }
 }
