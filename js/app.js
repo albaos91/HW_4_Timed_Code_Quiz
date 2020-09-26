@@ -216,3 +216,141 @@ const QuizGame = () => {
       }, 1000);
     }
   };
+  const stopWatch = () => {
+    if (totalTime === 0) {
+      // gameTime = totalTime;
+      endGame();
+      $(".time").text(totalTime);
+    }
+    if (totalTime > 0) {
+      $(".time").text(totalTime--);
+      setTimeout(stopWatch, 1000);
+    }
+  };
+
+  const endGame = () => {
+    displayScorecard();
+    $("#nameSubmit").on("click", handleInputSubmit);
+  };
+
+  const displayScorecard = () => {
+    $(".quiz").hide();
+    $(".scores").hide();
+    $(".time").hide();
+
+    $(".score_card").html(
+      `<div class="card score">
+          <h1 class="title text-white text-center pt-5 pb-3 pl-4 pr-4">Quiz Scorecard</h1>
+          <div class="card-header">
+            <p class="result py-4">Score: ${gameTime}</p>
+          </div>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">${wrong}</li>
+            <li class="list-group-item">${correct}</li>
+            <li class="list-group-item">${((correct / total) * 100).toFixed(
+              0
+            )}%</li>
+          </ul>
+        </div>
+        <div class="input-group mt-5">
+          <input type="text" class="form-control player" placeholder="Initials" aria-label="Username" aria-describedby="basic-addon1">
+          <div class="input-group-append">
+            <button class="btn btn-outline-success" type="button" id="nameSubmit">Submit</button>
+          </div>
+        </div>`
+    );
+  };
+
+  const handleInputSubmit = (e) => {
+    e.preventDefault();
+
+    $(".score_card").hide();
+    // $('.score_table').show();
+
+    const playerName = $(".player").val();
+    const player = {
+      name: playerName,
+      score: gameTime,
+    };
+    // console.log(player);
+    saveToLocalStorage(player);
+    displayRankings(player);
+  };
+
+  const displayRankings = (currentPlayer = {}) => {
+    const players = JSON.parse(localStorage.getItem("players"));
+
+    const rankings = $(`<div class="card">
+                        <div class= "card-header">
+                          <h3>Score Table</h3>
+                        </div>
+                      </div >`);
+
+    const playerList = $('<ul class="list-group list-group-flush"></ul>');
+
+    if (players !== null) {
+      sortArray(players);
+      players.forEach((player, index) => {
+        if (currentPlayer.name === player.name && currentPlayer !== {}) {
+          playerList.append(
+            `<li class="list-group-item font-weight-bold mt-1">${index + 1}. ${
+              player.name
+            } <span class="player_score">${player.score}</span></li>`
+          );
+        } else {
+          playerList.append(
+            `<li class="list-group-item mt-1">${index + 1}. ${
+              player.name
+            } <span class="player_score">${player.score}</span></li>`
+          );
+        }
+      });
+    }
+
+    rankings.append(playerList);
+    $(".score_table").append(rankings);
+  };
+
+  const checkRankingSubmit = (event) => {
+    if ($(event.target).hasClass("scores_nav")) {
+      $(".catalog").hide();
+      $(".languages").hide();
+      $(".outro").hide();
+      $(".scores_nav").prop("disabled", true);
+      displayRankings();
+    } else {
+      endGame();
+      $(".score_card").hide();
+      $(".scores_nav").prop("disabled", true);
+      displayRankings();
+    }
+  };
+
+  // Array that sorts the players array by the score
+  const sortArray = (arr) => {
+    arr.sort((a, b) => {
+      const scoreA = a.score;
+      const scoreB = b.score;
+      if (scoreA < scoreB) return 1;
+      if (scoreA > scoreB) return -1;
+      return 0;
+    });
+  };
+
+  // Saves the player to the LocalStorage
+  const saveToLocalStorage = (player) => {
+    if (localStorage.getItem("players") === null) {
+      const players = [];
+      players.push(player);
+      localStorage.setItem("players", JSON.stringify(players));
+    } else {
+      const players = JSON.parse(localStorage.getItem("players"));
+      players.push(player);
+      localStorage.setItem("players", JSON.stringify(players));
+    }
+  };
+
+  init();
+};
+
+QuizGame();
