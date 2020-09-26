@@ -1,148 +1,246 @@
-body{
-    font-size: 20px;
-    font-family: monospace;
+nav {
+  background-color: #00242b;
 }
 
-#container{
-    margin : 20px auto;
-    background-color: white;
-    height: 300px;
-    width : 700px;
-    border-radius: 5px;
-    box-shadow: 0px 5px 15px 0px;
-    position: relative;
-}
-#startQ{
-    font-size: 1.5em;
-    font-weight: bolder;
-    word-break: break-all;
-    width:100px;
-    height:150px;
-    border : 2px solid lightgrey;
-    text-align: center;
-    cursor: pointer;
-    position: absolute;
-    left:300px;
-    top:50px;
-    color : lightgrey;
-}
-#startQ:hover{
-    border: 3px solid lightseagreen;
-    color : lightseagreen;
+.jumbotron.catalog {
+  background-image: url("../HW_4_Timed_Code_Quiz/assets/Quiz.png");
+  background-repeat: no-repeat;
+  background-size: 300px;
+  background-position-x: center;
+
+  background-color: #fff;
+  height: 250px;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
 }
 
-#QImg{
-    width : 200px;
-    height : 200px;
-    position: absolute;
-    left : 0px;
-    top : 0px;
-}
-#QImg img{
-    width : 200px;
-    height : 200px;
-    border-top-left-radius: 5px;
+.intro {
+  border: none;
+  border-radius: 0;
 }
 
-#question{
-    width:500px;
-    height : 125px;
-    position: absolute;
-    right:0;
-    top:0;
-}
-#question p{
-    margin : 0;
-    padding : 15px;
-    font-size: 1.25em;
+.intro .card-header:first-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
-#Achoices{
- 
-    position: absolute;
-    left: 50px;
-    top : 125px;
-    padding : 10px
-}
-.choice{
-    display: inline-block;
-    width : 135px;
-    text-align: center;
-    border : 1px solid grey;
-    border-radius: 5px;
-    cursor: pointer;
-    padding : 5px;
-}
-.choice:hover{
-    border : 2px solid grey;
-    font-weight: bold;
+.intro .card-header {
+  background-color: #7de38d;
+  color: #fff;
+  padding: 0.5rem 0.5rem 0 0.5rem;
 }
 
-#timer{
-    position: absolute;
-    height : 100px;
-    width : 200px;
-    bottom : 0px;
-    text-align: center;
+.intro .card-header img {
+  width: 150px;
+  float: right;
+  margin-right: 0.75rem;
 }
-#counter{
-    font-size: 3em;
+
+.intro .card-body {
+  border-left: 1px solid rgba(0, 36, 43, 0.3);
+  border-right: 1px solid rgba(0, 36, 43, 0.3);
+  padding: 1.5rem 1rem 2.5rem 1rem;
+  /* padding-bottom: 1.5rem; */
 }
-#timeGaugebg{
-    width : 150px;
-    height : 10px;
-    border-radius: 10px;
-    background-color: lightgray;
-    margin-left : 25px;
+
+.intro .card-body p {
+  font-size: 0.9rem;
+  line-height: 1.25;
 }
-#timeGauge{
-    height : 10px;
-    border-radius: 10px;
-    background-color: mediumseagreen;
-    margin-top : -10px;
-    margin-left : 25px;
+
+.intro .card-footer:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
-#progress{
-    width : 500px;
-    position: absolute;
-    bottom : 0px;
-    right : 0px;
-    padding:5px;
-    text-align: right;
+
+.intro .card-footer {
+  background-color: #00242b;
+  color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  /* border-radius: 0.25rem; */
+  letter-spacing: 1px;
 }
-.prog{
-    width : 25px;
-    height : 25px;
-    border: 1px solid #000;
-    display: inline-block;
-    border-radius: 50%;
-    margin-left : 5px;
-    margin-right : 5px;
+
+.intro .card-footer img {
+  float: left;
+  width: 30px;
 }
-#scoreContainer{
-    margin : 20px auto;
-    background-color: white;
-    opacity: 0.8;
-    height: 300px;
-    width : 700px;
-    border-radius: 5px;
-    box-shadow: 0px 5px 15px 0px;
-    position: relative;
-    display: none;
+
+.intro .card-footer p {
+  display: inline-block;
+  font-weight: 600;
+  margin: 0;
+  padding-left: 5px;
+  padding-top: 2px;
+  text-transform: uppercase;
 }
-#scoreContainer img{
-    position: absolute;
-    top:100px;
-    left:325px;
+
+.intro .card-footer p:hover {
+  cursor: pointer;
 }
-#scoreContainer p{
-    position: absolute;
-    display: block;
-    width : 59px;
-    height :59px;
-    top:130px;
-    left:325px;
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
+
+.catalog h1 {
+  color: #00242b;
+}
+
+.languages h4 {
+  color: #00242b;
+  margin-bottom: 1.5rem;
+}
+
+.language {
+  box-shadow: 1px 1px 4px 4px rgba(0, 0, 0, 0.1);
+  background-color: #00242b;
+  color: #7de38d;
+  margin-top: 0.75rem;
+  z-index: 10;
+}
+
+.language .card-body {
+  padding: 0.5rem;
+}
+
+.lang_icon {
+  float: left;
+  padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+}
+
+.lang_def {
+  margin: 0;
+  padding-top: 0.5rem;
+}
+
+.fa-html5,
+.fa-css3-alt,
+.fa-js {
+  font-size: 2rem;
+}
+
+.language .card-body:hover {
+  box-shadow: 1px 1px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.outro .container {
+  height: 200px;
+}
+
+.scores_nav {
+  border-color: #7de38d;
+  color: #fff;
+}
+
+.scores,
+.time {
+  color: #fff;
+  display: none;
+}
+
+.quiz_card {
+  border: none;
+  border-radius: 0;
+
+  background-color: #00242b;
+}
+
+.quiz_card ul li {
+  background-color: #00242b;
+  border: 1px solid #7de38d;
+}
+
+.quiz_card ul li:hover {
+  cursor: pointer;
+}
+
+.quiz_card .card-header + .list-group .list-group-item:first-child {
+  border-top: 1px solid #7de38d;
+}
+
+.quiz_card.card > .list-group:last-child .list-group-item:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.quiz_card .list-group-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.score.card {
+  border-color: #fff;
+  background-color: #00202b;
+}
+
+.score.card .card-header {
+  border-bottom-color: #fff;
+}
+
+.result {
+  color: #7de38d;
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.score.card ul {
+  width: 100%;
+}
+
+.score.card ul li {
+  border: 0;
+  color: #fff;
+  background-color: #00202b;
+  width: 33%;
+  text-align: right;
+}
+
+.score_table {
+  padding-bottom: 5rem;
+}
+
+.score_table .card .card-header + .list-group .list-group-item:first-child {
+  border-top: 1px solid #7de38d;
+}
+
+.score_table .card > .list-group:last-child .list-group-item:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom: 1px solid #7de38d;
+}
+
+.score_table .card {
+  border: 0;
+  background-color: #00242b;
+}
+
+.score_table .card h3 {
+  color: #fff;
+}
+
+.score_table .card ul li {
+  background-color: #00242b;
+  border: 1px solid #7de38d;
+  color: #fff;
+}
+
+.player_score {
+  float: right;
+}
+
+footer {
+  background-color: #00242b;
+  color: #7de38d;
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* top: -10px; */
+
+  text-align: center;
+}
+
+footer p {
+  font-size: 0.75rem;
+  margin: 0;
+  padding: 0.5rem 0;
 }
