@@ -117,3 +117,102 @@ const QuizGame = () => {
       $("#" + quiz.id).on("click", startGame);
     });
   };
+  const loadJsCards = () => {
+    // JS Quizzes
+    const jsQuizzes = [
+      {
+        title: "Intro to Javascript",
+        intro: "JavaScript data types, built-in methods, and variables.",
+        id: "js_intro",
+      },
+      {
+        title: "Conditional Statements",
+        intro:
+          "use of if, else if, else, switch, and ternary syntax to control the flow of a program in JavaScript.",
+        id: "js_conditionals",
+      },
+      {
+        title: "Functions",
+        intro:
+          "JavaScript function syntax, passing data to functions, the return keyword, ES6 arrow functions, and concise body syntax.",
+        id: "js_functions",
+      },
+    ];
+
+    $(".catalog").hide();
+    $(".languages").hide();
+    $(".outro").hide();
+    $(".quiz_cards").show();
+
+    jsQuizzes.forEach((quiz) => {
+      $(".quiz_cards .container").append(`<div class="card intro mt-3">
+        <div class= "card-header">
+          <h6 class="mt-1 mb-0 ml-1">Getting Started with JavaScript</h6>
+          <img src="./src/public/assets/images/drawkit-content-man-colour.svg" alt="">
+            </div>
+          <div class="card-body">
+            <h4 class="card-title">${quiz.title}</h4>
+            <p class="card-text">Practice ${quiz.intro}</p>
+          </div>
+          <div class="card-footer">
+            <img src="./src/public/assets/images/isolated-layout.svg" alt="">
+              <p id="${quiz.id}" class="start">Practice</p>
+            </div>`);
+      $("#" + quiz.id).on("click", startGame);
+    });
+  };
+
+  const displayQuestion = () => {
+    const question = questions.shift();
+    // console.log(questions);
+    const quiz = $(`<div class="card quiz_card text-white">
+                        <div class= "card-header">
+                          ${question.title}
+                        </div>
+                      </div >`);
+
+    const choicesList = $('<ul class="list-group"></ul>');
+
+    choicesList.on("click", (e) => {
+      handleAnswerClick(e, question.answer);
+    });
+
+    question["choices"].forEach((choice) => {
+      choicesList.append(`<li  class="list-group-item mt-3">${choice}</li>`);
+    });
+    quiz.append(choicesList);
+    $(".quiz").append(quiz);
+  };
+
+  const handleAnswerClick = (e, answer) => {
+    e.preventDefault();
+
+    if ($(e.target).html() === answer) {
+      e.target.style.backgroundColor = "#164032";
+      correct++;
+      totalTime++;
+      setTimeout(() => {
+        $(".quiz").empty();
+        if (questions.length !== 0) {
+          displayQuestion();
+        } else {
+          gameTime = totalTime;
+          endGame();
+          $(".time").text(totalTime);
+          totalTime = 0;
+        }
+      }, 1000);
+    } else {
+      wrong++;
+      e.target.style.borderColor = "#e53935";
+      e.target.style.backgroundColor = "#661917";
+      setTimeout(() => {
+        totalTime -= 9;
+        if (totalTime <= 0) {
+          totalTime = 0;
+        }
+        $(".quiz").empty();
+        displayQuestion();
+      }, 1000);
+    }
+  };
